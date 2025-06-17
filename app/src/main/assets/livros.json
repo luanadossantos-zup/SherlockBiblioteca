@@ -1,0 +1,188 @@
+[
+  {
+    "titulo": "Um Estudo em Vermelho",
+    "ano": 1887,
+    "descricao": "Sherlock Holmes e Dr. Watson se conhecem e investigam um assassinato misterioso envolvendo vingança e um passado sombrio nos Estados Unidos.",
+    "tipo": "Romance"
+  },
+  {
+    "titulo": "O Signo dos Quatro",
+    "ano": 1890,
+    "descricao": "Holmes e Watson desvendam um caso de tesouro roubado, pactos antigos e traição, enquanto Watson conhece sua futura esposa.",
+    "tipo": "Romance"
+  },
+  {
+    "titulo": "O Cão dos Baskervilles",
+    "ano": 1902,
+    "descricao": "Holmes investiga a lenda de um cão demoníaco que assombra uma família nobre no interior da Inglaterra.",
+    "tipo": "Romance"
+  },
+  {
+    "titulo": "O Vale do Medo",
+    "ano": 1915,
+    "descricao": "Um assassinato em uma mansão inglesa leva Holmes a desvendar segredos de uma sociedade secreta americana.",
+    "tipo": "Romance"
+  },
+  {
+    "titulo": "Um Escândalo na Boêmia",
+    "ano": 1891,
+    "descricao": "Holmes tenta recuperar uma fotografia comprometedora para um rei europeu, enfrentando Irene Adler.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "A Liga dos Cabeças Vermelhas",
+    "ano": 1891,
+    "descricao": "Holmes investiga uma sociedade misteriosa criada para enganar um lojista ingênuo.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Um Caso de Identidade",
+    "ano": 1891,
+    "descricao": "Uma jovem procura Holmes para descobrir o paradeiro de seu noivo desaparecido.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Mistério do Vale Boscombe",
+    "ano": 1891,
+    "descricao": "Holmes desvenda o assassinato de um fazendeiro, com o filho da vítima como principal suspeito.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "As Cinco Sementes de Laranja",
+    "ano": 1891,
+    "descricao": "Holmes investiga mortes misteriosas ligadas a ameaças envolvendo sementes de laranja.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Homem do Lábio Retorcido",
+    "ano": 1891,
+    "descricao": "Holmes procura um homem desaparecido e descobre um segredo surpreendente sobre sua identidade.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Carbúnculo Azul",
+    "ano": 1892,
+    "descricao": "Um valioso rubi é encontrado dentro de um ganso de Natal, levando Holmes a uma investigação inusitada.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "A Faixa Malhada",
+    "ano": 1892,
+    "descricao": "Holmes desvenda a morte de uma jovem, causada por uma cobra venenosa usada como arma.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Polegar do Engenheiro",
+    "ano": 1892,
+    "descricao": "Um engenheiro aparece com o polegar decepado após aceitar um trabalho suspeito.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Aristocrata Solteirão",
+    "ano": 1892,
+    "descricao": "Holmes investiga o desaparecimento de uma noiva na véspera do casamento.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Mistério da Coroa de Berilos",
+    "ano": 1892,
+    "descricao": "Holmes é chamado para resolver o roubo de uma valiosa coroa de berilos.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Diadema de Berilos",
+    "ano": 1892,
+    "descricao": "Holmes investiga o roubo de um diadema precioso e a suspeita recai sobre o filho do proprietário.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "A Casa Vazia",
+    "ano": 1903,
+    "descricao": "Holmes retorna após ser dado como morto e resolve o assassinato de um jovem nobre.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Construtor de Norwood",
+    "ano": 1903,
+    "descricao": "Holmes investiga o desaparecimento de um homem rico e a suspeita recai sobre um jovem inocente.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Os Dançarinos",
+    "ano": 1903,
+    "descricao": "Holmes decifra mensagens codificadas em desenhos de bonecos dançantes para evitar um crime.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Ciclista Solitário",
+    "ano": 1903,
+    "descricao": "Uma mulher é perseguida por um ciclista misterioso e Holmes descobre um plano de sequestro.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "A Escola do Priorado",
+    "ano": 1904,
+    "descricao": "Holmes investiga o desaparecimento de um aluno em uma escola particular.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Black Peter",
+    "ano": 1904,
+    "descricao": "Holmes desvenda o assassinato de um capitão de navio conhecido por sua brutalidade.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Charles Augustus Milverton",
+    "ano": 1904,
+    "descricao": "Holmes enfrenta um chantagista cruel para proteger a reputação de uma cliente.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Os Seis Napoleões",
+    "ano": 1904,
+    "descricao": "Holmes investiga a destruição de bustos de Napoleão para encontrar um objeto escondido.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "Os Três Estudantes",
+    "ano": 1904,
+    "descricao": "Holmes resolve o roubo de uma prova em uma universidade.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Monograma Azul",
+    "ano": 1904,
+    "descricao": "Holmes investiga o roubo de uma joia valiosa e o envolvimento de uma criada.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Pince-nez de Ouro",
+    "ano": 1904,
+    "descricao": "Holmes desvenda um assassinato misterioso com a ajuda de um par de óculos dourados.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Desaparecimento de Lady Frances Carfax",
+    "ano": 1911,
+    "descricao": "Holmes procura uma dama desaparecida e descobre um plano de assassinato.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Pé do Diabo",
+    "ano": 1910,
+    "descricao": "Holmes investiga mortes estranhas causadas por um veneno africano raro.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Detetive Moribundo",
+    "ano": 1913,
+    "descricao": "Holmes finge estar à beira da morte para capturar um criminoso.",
+    "tipo": "Conto"
+  },
+  {
+    "titulo": "O Último Adeus de Sherlock Holmes",
+    "ano": 1917,
+    "descricao": "Holmes resolve seu último caso oficial durante a Primeira Guerra Mundial.",
+    "tipo": "Conto"
+  }
+]

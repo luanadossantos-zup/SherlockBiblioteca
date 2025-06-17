@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tituloLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título do Livro"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/anoLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ano: 1900"
+            android:textSize="14sp"
+            android:textColor="#666" />
+
+        <TextView
+            android:id="@+id/descricaoLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descrição do livro aqui."
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/tipoLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conto"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
