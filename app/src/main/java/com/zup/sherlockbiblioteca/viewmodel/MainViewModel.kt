@@ -22,8 +22,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _visibleBooks = MutableStateFlow<List<Book>>(emptyList())
     val visibleBooks: StateFlow<List<Book>> = _visibleBooks.asStateFlow()
 
-    private var allBooks: List<Book> = emptyList()
-    private var filteredResults: List<Book> = emptyList()
+    protected var allBooks: List<Book> = emptyList()
+    protected var filteredResults: List<Book> = emptyList()
 
     private var selectedFormatOfStories: String? = null
 
@@ -58,7 +58,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun loadPage() {
+    protected fun loadPage() {
         val end = ((currentPage + 1) * pageSize).coerceAtMost(filteredResults.size)
         val newList = filteredResults.take(end)
         _visibleBooks.value = newList
