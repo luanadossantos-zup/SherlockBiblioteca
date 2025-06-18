@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zup.sherlockbiblioteca.adapter.LivroAdapter
+import com.zup.sherlockbiblioteca.adapter.BookAdapter
 import com.zup.sherlockbiblioteca.databinding.ActivityMainBinding
 import com.zup.sherlockbiblioteca.viewmodel.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var adapter: LivroAdapter
+    private lateinit var adapter: BookAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,34 +28,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Configura o RecyclerView
-        adapter = LivroAdapter()
-        binding.recyclerLivros.layoutManager = LinearLayoutManager(this)
-        binding.recyclerLivros.adapter = adapter
+        adapter = BookAdapter()
+        binding.recyclerBooks.layoutManager = LinearLayoutManager(this)
+        binding.recyclerBooks.adapter = adapter
 
         // Detecta scroll infinito
-        binding.recyclerLivros.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.recyclerBooks.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val ultimoItemVisivel = layoutManager.findLastVisibleItemPosition()
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
                 val totalItens = adapter.itemCount
-                if (ultimoItemVisivel >= totalItens - 2) { // margem de segurança
-                    viewModel.carregarMais()
+                if (lastVisibleItem >= totalItens - 2) { // margem de segurança
+                    viewModel.loadMore()
                 }
             }
         })
 
         // Observa os livros visíveis
         lifecycleScope.launch {
-            viewModel.livrosVisiveis.collectLatest { lista ->
-                adapter.submitList(lista)
+            viewModel.visibleBooks.collectLatest { list ->
+                adapter.submitList(list)
             }
         }
 
         // Atualiza o campo de busca
         binding.campoBusca.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                viewModel.atualizarQuery(s.toString())
+                viewModel.updateQuery(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -63,15 +63,15 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             botaoContos.setOnClickListener {
-                viewModel.filtrarContos()
+                viewModel.filterShortStories()
             }
 
             botaoRomances.setOnClickListener {
-                viewModel.filtrarRomances()
+                viewModel.filterNovels()
             }
 
             botaoMostrarTudo.setOnClickListener {
-                viewModel.limparFiltroTipo()
+                viewModel.cleanFilterFormat()
             }
         }
     }

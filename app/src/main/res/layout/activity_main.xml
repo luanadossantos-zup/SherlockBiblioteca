@@ -6,16 +6,25 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="151dp"
+        android:layout_height="122dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sherlock_holmes" />
+
     <EditText
         android:id="@+id/campoBusca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Digite o nome do livro"
+        android:hint="@string/digite_o_nome_do_livro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/botaoContos"
@@ -23,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Contos"
+        android:backgroundTint="@color/black"
+        android:text="@string/contos"
         app:layout_constraintEnd_toStartOf="@+id/botaoRomances"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -37,7 +47,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Romances"
+        android:backgroundTint="@color/black"
+        android:text="@string/romances"
         app:layout_constraintEnd_toStartOf="@+id/botaoMostrarTudo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/botaoContos"
@@ -49,7 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Todos"
+        android:backgroundTint="@color/black"
+        android:text="@string/todos"
         app:icon="@drawable/baseline_menu_book_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -57,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/campoBusca" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerLivros"
+        android:id="@+id/recyclerBooks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

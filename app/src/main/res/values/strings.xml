@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SherlockBiblioteca</string>
+    <string name="digite_o_nome_do_livro">Digite o nome do livro</string>
+    <string name="contos">Contos</string>
+    <string name="romances">Romances</string>
+    <string name="todos">Todos</string>
 </resources>

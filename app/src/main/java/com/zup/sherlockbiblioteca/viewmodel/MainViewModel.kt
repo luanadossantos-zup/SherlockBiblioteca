@@ -3,7 +3,7 @@ package com.zup.sherlockbiblioteca.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.zup.sherlockbiblioteca.model.Livro
+import com.zup.sherlockbiblioteca.model.Book
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,99 +19,83 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query.asStateFlow()
 
-    private val _livrosVisiveis = MutableStateFlow<List<Livro>>(emptyList())
-    val livrosVisiveis: StateFlow<List<Livro>> = _livrosVisiveis.asStateFlow()
+    private val _visibleBooks = MutableStateFlow<List<Book>>(emptyList())
+    val visibleBooks: StateFlow<List<Book>> = _visibleBooks.asStateFlow()
 
-    private var todosOsLivros: List<Livro> = emptyList()
-    private var resultadosFiltrados: List<Livro> = emptyList()
+    private var allBooks: List<Book> = emptyList()
+    private var filteredResults: List<Book> = emptyList()
 
-    private var tipoSelecionado: String? = null // pode ser "Conto", "Romance" ou null (sem filtro)
+    private var selectedFormatOfStories: String? = null
 
     private val pageSize = 10
-    private var paginaAtual = 0
+    private var currentPage = 0
 
     init {
         viewModelScope.launch {
-            todosOsLivros = carregarLivrosDoJSON(application)
-            resultadosFiltrados = todosOsLivros
-            carregarPagina()
+            allBooks = loadBooksFromJSON(application)
+            filteredResults = allBooks
+            loadPage()
         }
 
         viewModelScope.launch {
             query
                 .debounce(300)
                 .distinctUntilChanged()
-                .collect { texto ->
-                    paginaAtual = 0
-
-                    // Aplica o filtro por texto + tipo, se houver
-                    resultadosFiltrados = todosOsLivros.filter { livro ->
-                        val casaComBusca = texto.length < 3 || livro.titulo.contains(texto, ignoreCase = true)
-                        val casaComTipo = tipoSelecionado == null || livro.tipo == tipoSelecionado
-                        casaComBusca && casaComTipo
-                    }
-
-                    carregarPagina()
+                .collect { text ->
+                    filterBooks(text)
                 }
-
-        }
-
-    }
-
-    fun atualizarQuery(nova: String) {
-        _query.value = nova //Main Activity chama a função
-    }
-
-    fun carregarMais() {
-        if ((paginaAtual + 1) * pageSize < resultadosFiltrados.size) {
-            paginaAtual++
-            carregarPagina()
         }
     }
 
-    private fun carregarPagina() {
-        val fim = ((paginaAtual + 1) * pageSize).coerceAtMost(resultadosFiltrados.size)
-        val novaLista = resultadosFiltrados.take(fim)
-        _livrosVisiveis.value = novaLista
+    fun updateQuery(new: String) {
+        _query.value = new //Main Activity chama a função
     }
 
-    private fun carregarLivrosDoJSON(context: Context): List<Livro> {
+    fun loadMore() {
+        if ((currentPage + 1) * pageSize < filteredResults.size) {
+            currentPage++
+            loadPage()
+        }
+    }
+
+    private fun loadPage() {
+        val end = ((currentPage + 1) * pageSize).coerceAtMost(filteredResults.size)
+        val newList = filteredResults.take(end)
+        _visibleBooks.value = newList
+    }
+
+    private fun loadBooksFromJSON(context: Context): List<Book> {
         val json = context.assets.open("livros.json")
             .bufferedReader()
             .use { it.readText() }
 
-        val tipo = object : TypeToken<List<Livro>>() {}.type
-        return Gson().fromJson(json, tipo)
+        val formatOfStories = object : TypeToken<List<Book>>() {}.type
+        return Gson().fromJson(json, formatOfStories)
     }
 
-    fun filtrarContos() {
-        tipoSelecionado = "Conto"
-        aplicarFiltro()
-    }
-
-    fun filtrarRomances() {
-        tipoSelecionado = "Romance"
-        aplicarFiltro()
-    }
-
-    fun limparFiltroTipo() {
-        tipoSelecionado = null
-        aplicarFiltro()
-    }
-
-    private fun aplicarFiltro() {
-        paginaAtual = 0
-
-        resultadosFiltrados = todosOsLivros.filter { livro ->
-            val texto = query.value
-            val casaComBusca = texto.length < 3 || livro.titulo.contains(texto, ignoreCase = true)
-            val casaComTipo = tipoSelecionado == null || livro.tipo == tipoSelecionado
-            casaComBusca && casaComTipo
+    private fun filterBooks(text: String = query.value) {
+        currentPage = 0
+        filteredResults = allBooks.filter { book ->
+            val matchSearch = text.length < 3 || book.title.contains(text, ignoreCase = true)
+            val matchFormat = selectedFormatOfStories == null || book.format == selectedFormatOfStories
+            matchSearch && matchFormat
         }
-
-        carregarPagina()
+        loadPage()
     }
 
+    fun filterShortStories() {
+        selectedFormatOfStories = "Conto"
+        filterBooks()
+    }
 
+    fun filterNovels() {
+        selectedFormatOfStories = "Romance"
+        filterBooks()
+    }
+
+    fun cleanFilterFormat() {
+        selectedFormatOfStories = null
+        filterBooks()
+    }
 }
 
