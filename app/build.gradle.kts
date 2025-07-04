@@ -58,7 +58,8 @@ dependencies {
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("androidx.arch.core:core-testing:2.2.0")
 
-
+    //Java poet
+    implementation("com.squareup:javapoet:1.13.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -68,4 +69,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force ("com.squareup:javapoet:1.13.0")
+    }
 }

@@ -1,29 +1,26 @@
 package com.zup.sherlockbiblioteca.viewmodel
 
-import android.app.Application
-import android.content.Context
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.zup.sherlockbiblioteca.model.Book
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import androidx.lifecycle.viewModelScope
+import com.zup.sherlockbiblioteca.repository.BookRepository
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel (private val repository: BookRepository) : ViewModel() {
 
     private val _query = MutableStateFlow("")
-    val query: StateFlow<String> = _query.asStateFlow()
+    private val query: StateFlow<String> = _query.asStateFlow()
 
     private val _visibleBooks = MutableStateFlow<List<Book>>(emptyList())
     val visibleBooks: StateFlow<List<Book>> = _visibleBooks.asStateFlow()
 
-    protected var allBooks: List<Book> = emptyList()
-    protected var filteredResults: List<Book> = emptyList()
+    private var allBooks: List<Book> = emptyList()
+    private var filteredResults: List<Book> = emptyList()
 
     private var selectedFormatOfStories: String? = null
 
@@ -32,11 +29,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            allBooks = loadBooksFromJSON(application)
+            allBooks = repository.loadBooksFromJSON()
             filteredResults = allBooks
-            loadPage()
+            emitVisiblePage()
         }
 
+        //3 -----------------
+        //O Flow query dispara uma reação
+        //Esse bloco do init do ViewModel escuta o Flow:
         viewModelScope.launch {
             query
                 .debounce(300)
@@ -47,6 +47,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    //2 --------------------
+    // A ViewModel atualiza o flow query, no caso ela emite um novo valor
+    //no StateFlow chamado query
+    //
     fun updateQuery(new: String) {
         _query.value = new //Main Activity chama a função
     }
@@ -54,25 +58,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun loadMore() {
         if ((currentPage + 1) * pageSize < filteredResults.size) {
             currentPage++
-            loadPage()
+            emitVisiblePage()
         }
     }
 
-    protected fun loadPage() {
+    // 5 ----------------
+    // A ViewModel emite a nova lista de livros visíveis via StateFlow.
+    private fun emitVisiblePage() {
         val end = ((currentPage + 1) * pageSize).coerceAtMost(filteredResults.size)
         val newList = filteredResults.take(end)
         _visibleBooks.value = newList
     }
 
-    private fun loadBooksFromJSON(context: Context): List<Book> {
-        val json = context.assets.open("livros.json")
-            .bufferedReader()
-            .use { it.readText() }
-
-        val formatOfStories = object : TypeToken<List<Book>>() {}.type
-        return Gson().fromJson(json, formatOfStories)
-    }
-
+    // 4 -------------
+    //O texto digitado é passado para filterBooks(text)
+    //A lista filteredResults é atualizada e a primeira “página” (10 livros) é enviada
     private fun filterBooks(text: String = query.value) {
         currentPage = 0
         filteredResults = allBooks.filter { book ->
@@ -80,7 +80,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val matchFormat = selectedFormatOfStories == null || book.format == selectedFormatOfStories
             matchSearch && matchFormat
         }
-        loadPage()
+        emitVisiblePage()
     }
 
     fun filterShortStories() {
